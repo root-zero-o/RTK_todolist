@@ -30,6 +30,20 @@ export const post = createAsyncThunk(
     }
 )
 
+// 데이터 Delete
+export const deleteTodo = createAsyncThunk(
+    "todo/deleteTodo",
+    async(id : number | undefined) => {
+        try {
+            await apis.deleteTodo(id)
+            alert("삭제 완료!")
+        }
+        catch(error){
+            alert("삭제 실패!")
+        }
+    }
+)
+
 // 초기값을 설정해준다.
 
 export const initialState : InitialState = {

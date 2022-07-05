@@ -1,3 +1,6 @@
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+
+
 // 초기 상태 타입
 export type TodoState = {
     id?: number,
@@ -10,4 +13,7 @@ export type InitialState = {
     loading: boolean,
     error: boolean
 }
+
+export type AppDispatch = ThunkDispatch<TodoState, any, AnyAction>;
+
 
