@@ -6,4 +6,5 @@ function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />
 }
 
+// wrapper로 app을 감싸준다.
 export default wrapper.withRedux(MyApp)
