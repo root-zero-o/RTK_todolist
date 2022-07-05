@@ -3,7 +3,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import rootReducer from './modules';
 
 // configureStore
-// - 기본 미들웨어로 redux-thunk를 추가하해준다.
+// - 기본 미들웨어로 redux-thunk를 추가해준다.
 // - Redux DevTools Extension을 활성화해준다.
 
 export const makeStore = () => configureStore({ 

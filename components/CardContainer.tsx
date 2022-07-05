@@ -1,11 +1,11 @@
 import React from 'react'
 import { Card } from './Card'
-import useTodos from "../Hooks/todosHook";
+import useGetTodos from "../Hooks/todosHook";
 import Input from './Input';
 
 export const CardContainer = () => {
 
-    const {lists, loading, error} = useTodos();
+    const {lists, loading, error} = useGetTodos();
 
   return (
     <div className="flex flex-col item-center p-10">

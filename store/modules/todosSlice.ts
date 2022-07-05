@@ -11,7 +11,9 @@ export const fetchTodos = createAsyncThunk("todo/fetchTodos", async() => {
     return data;
 })
 
-const initialState : InitialState = {
+// 초기값을 설정해준다.
+
+export const initialState : InitialState = {
     lists : [],
     loading: false,
     error: false,
