@@ -94,20 +94,6 @@ const todosSlice = createSlice({
             state.lists = [];
             state.error = true;
         })
-        // post 관련
-        .addCase(post.pending, state => {
-            state.loading = true
-        })
-        .addCase(post.fulfilled, (state, action : PayloadAction<any>) => {
-            state.loading = false;
-            state.lists.push(action.payload)
-            state.error = false;
-        })
-        .addCase(post.rejected, (state) =>{
-            state.loading = false;
-            state.lists = [...state.lists];
-            state.error = true;
-        })
 
         // .addMatcher(matcher, reducer) : 새로 들어오는 모든 액션에 대해 주어진 패턴과 일치하는지 확인 후 reducer 실행
         // .addDefaultCase(reducer) : 그 어떤 케이스 리듀서나 matcher 리듀서도 실행되지 않았을 때, 기본 리듀서 실행
