@@ -43,6 +43,19 @@ export const deleteTodo = createAsyncThunk(
         }
     }
 )
+// 데이터 Update
+export const update = createAsyncThunk(
+    "todo/updateTodo",
+    async(payload : TodoState) => {
+        try {
+            await apis.updateTodo(payload)
+            alert("업데이트 성공!")
+        }
+        catch(error) {
+            alert("업데이트 실패!")
+        }
+    }
+)
 
 // 초기값을 설정해준다.
 

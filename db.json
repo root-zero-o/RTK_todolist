@@ -8,7 +8,7 @@
     {
       "id": 2,
       "content": "Study Typescript",
-      "completed": false
+      "completed": true
     },
     {
       "id": 3,

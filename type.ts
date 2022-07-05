@@ -4,7 +4,7 @@ import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 // 초기 상태 타입
 export type TodoState = {
     id?: number,
-    content : string,
+    content? : string,
     completed : boolean
 }
 
