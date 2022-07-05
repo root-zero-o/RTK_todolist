@@ -1,11 +1,18 @@
 import React from 'react'
 import { Card } from './Card'
-import useGetTodos from "../Hooks/todosHook";
+import useGetTodos from "../Hooks/useGetTodos";
 import Input from './Input';
 
 export const CardContainer = () => {
 
     const {lists, loading, error} = useGetTodos();
+
+  if (loading){
+    return <div>loading..</div>
+  }
+  else if(error){
+    return <div>Something Wrong :(</div>
+  }
 
   return (
     <div className="flex flex-col item-center p-10">
@@ -14,9 +21,9 @@ export const CardContainer = () => {
           { lists?.map((val, idx) => (
             <Card 
               key={idx}
-              id={val.id}
-              content={val.content}
-              completed={val.completed}
+              id={val?.id}
+              content={val?.content}
+              completed={val?.completed}
               />
           ))}
         </div>

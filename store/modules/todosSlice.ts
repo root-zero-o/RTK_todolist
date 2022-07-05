@@ -1,15 +1,34 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { AnyAction, createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import apis from '../../api/main'
-import { InitialState } from '../../type'
+import { InitialState, TodoState } from '../../type'
 
 // createAsyncThunk
 // - createAction의 비동기 버전을 위해 제안되었다.
 // - 액션타입 문자열, 프로미스를 반환하는 콜백함수를 인자로 받는다.
 // - 주어진 액션타입 문자열을 접두어로 사용하는 액션타입을 생성한다.
-export const fetchTodos = createAsyncThunk("todo/fetchTodos", async() => {
-    const { data } = await apis.getTodos()
-    return data;
-})
+
+// 데이터 전체 가져오기
+export const fetchTodos = createAsyncThunk(
+    "todo/fetchTodos", 
+    async() => {
+        const { data } = await apis.getTodos()
+        return data;
+    }
+)
+
+// 데이터 post
+export const post = createAsyncThunk(
+    "todo/postTodos", 
+    async(payload : TodoState) => {
+        try{
+            await apis.postTodo(payload)
+            alert("등록 완료!")
+        }
+        catch(error){
+            alert("등록 실패!")
+        }
+    }
+)
 
 // 초기값을 설정해준다.
 
@@ -34,6 +53,7 @@ const todosSlice = createSlice({
     // - 프로미스 진행 상태에 따라 리듀서를 실행할 수 있다.
     extraReducers: builder => {
         builder
+        // get 관련
         .addCase(fetchTodos.pending, state => {
             state.loading = true;
         })
@@ -47,6 +67,21 @@ const todosSlice = createSlice({
             state.lists = [];
             state.error = true;
         })
+        // post 관련
+        .addCase(post.pending, state => {
+            state.loading = true
+        })
+        .addCase(post.fulfilled, (state, action : PayloadAction<any>) => {
+            state.loading = false;
+            state.lists.push(action.payload)
+            state.error = false;
+        })
+        .addCase(post.rejected, (state) =>{
+            state.loading = false;
+            state.lists = [...state.lists];
+            state.error = true;
+        })
+
         // .addMatcher(matcher, reducer) : 새로 들어오는 모든 액션에 대해 주어진 패턴과 일치하는지 확인 후 reducer 실행
         // .addDefaultCase(reducer) : 그 어떤 케이스 리듀서나 matcher 리듀서도 실행되지 않았을 때, 기본 리듀서 실행
     }
