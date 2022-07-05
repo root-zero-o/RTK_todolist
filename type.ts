@@ -1,7 +1,7 @@
 // 초기 상태 타입
 export type TodoState = {
     id?: number,
-    todo : string,
+    content : string,
     completed : boolean
 }
 
